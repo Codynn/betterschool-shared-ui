@@ -15,6 +15,7 @@ export function Navbar({
   erpLoginHref,
   erpSignupHref,
   dashboardHref = `${directoryLoginHref.replace(/\/login$/, '')}/dashboard`,
+  accountMenuExtra,
   onLogout,
 }: NavbarProps) {
   const pathname = usePathname();
@@ -126,6 +127,7 @@ export function Navbar({
                   <Link href={dashboardHref} className="bsu-dropdown-item">
                     Dashboard
                   </Link>
+                  {accountMenuExtra}
                   <button className="bsu-dropdown-item" onClick={handleLogout}>
                     Logout
                   </button>
@@ -252,6 +254,7 @@ export function Navbar({
               <Link href={dashboardHref} className="bsu-btn bsu-btn-outline">
                 Dashboard
               </Link>
+              {accountMenuExtra}
               <button className="bsu-btn bsu-btn-solid" onClick={handleLogout}>
                 Logout
               </button>

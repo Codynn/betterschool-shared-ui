@@ -32,6 +32,8 @@ export type NavbarProps = {
   erpLoginHref: string;
   erpSignupHref?: string;
   dashboardHref?: string;
+  /** Extra items rendered in the logged-in account menu, after Dashboard and before Logout. */
+  accountMenuExtra?: ReactNode;
   /** Called when the user clicks logout; should also clear any app-specific state. */
   onLogout?: () => void;
 };
