@@ -59,7 +59,11 @@ export function Navbar({
   return (
     <nav className="bsu-nav">
       <div className="bsu-nav-inner">
-        <Link href={homeHref} className="w-8 h-8 flex-shrink-0" aria-label="Home">
+        <Link
+          href={homeHref}
+          style={{ width: '2rem', height: '2rem', flexShrink: 0, position: 'relative' }}
+          aria-label="Home"
+        >
           {logo}
         </Link>
 
@@ -191,7 +195,11 @@ export function Navbar({
 
       <div className={`bsu-drawer ${isDrawerOpen ? '' : 'bsu-drawer-hidden'}`}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Link href={homeHref} onClick={() => setIsDrawerOpen(false)} className="w-8 h-8">
+          <Link
+            href={homeHref}
+            onClick={() => setIsDrawerOpen(false)}
+            style={{ width: '2rem', height: '2rem', position: 'relative' }}
+          >
             {logo}
           </Link>
           <button onClick={() => setIsDrawerOpen(false)} aria-label="Close menu">
