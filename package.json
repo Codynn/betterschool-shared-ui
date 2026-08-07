@@ -17,8 +17,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup",
-    "prepare": "npm run build"
+    "build": "tsup"
   },
   "peerDependencies": {
     "next": ">=14",
