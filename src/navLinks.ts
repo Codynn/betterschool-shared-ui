@@ -147,6 +147,27 @@ export const FEATURES_MEGA_MENU: MegaMenuGroup[] = [
       },
     ],
   },
+  {
+    title: "Video",
+    items: [
+      {
+        label: "Setup",
+        path: "https://www.youtube.com/watch?v=u6kNUeZpd7Y&list=PLQHgAXelxfHE",
+      },
+      {
+        label: "Academics",
+        path: "https://www.youtube.com/watch?v=O3usb4QEYQc&list=PLOk3pETX4HkM",
+      },
+      {
+        label: "Communications",
+        path: "https://www.youtube.com/watch?v=Gln6C8CIHVo&list=PLCfsWrBKuQvE",
+      },
+      {
+        label: "Finance",
+        path: "https://www.youtube.com/watch?v=5cpT4HERkAk&list=PLGN1HR_KYEFU",
+      },
+    ],
+  },
 ];
 
 const LANDING_ORIGIN = "https://www.betterschool.app";
