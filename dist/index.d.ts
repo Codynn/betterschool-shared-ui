@@ -61,6 +61,6 @@ declare const FEATURES_MEGA_MENU: MegaMenuGroup[];
  * Contact — when rendered from the directory app (served under the
  * `/directory` basePath), those links point back at the landing origin.
  */
-declare function buildMainNavLinks(context: 'landing' | 'directory'): NavLink[];
+declare function buildMainNavLinks(context: "landing" | "directory"): NavLink[];
 
 export { FEATURES_MEGA_MENU, type MegaMenuGroup, type MegaMenuItem, type NavLink, Navbar, type NavbarProps, SCHOOL_AUTH_EVENT, SCHOOL_TOKEN_KEY, SCHOOL_USER_KEY, type SchoolUser, buildMainNavLinks, useSchoolAuth };
