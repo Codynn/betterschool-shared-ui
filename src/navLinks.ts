@@ -180,7 +180,9 @@ export function buildMainNavLinks(context: "landing" | "directory"): NavLink[] {
     {
       label: "Features",
       path: `${prefix}/feature`,
-      megaMenu: prefixMegaMenu(FEATURES_MEGA_MENU, prefix),
+      // TODO:: Re-enable the Features mega menu dropdown once it's ready to
+      // ship again — the "Features" link still goes to /feature on its own.
+      // megaMenu: prefixMegaMenu(FEATURES_MEGA_MENU, prefix),
     },
     { label: "Schools", path: context === "directory" ? "/" : "/directory" },
     { label: "Pricing", path: `${prefix}/pricing` },
