@@ -182,7 +182,7 @@ export function buildMainNavLinks(context: "landing" | "directory"): NavLink[] {
       path: `${prefix}/feature`,
       megaMenu: prefixMegaMenu(FEATURES_MEGA_MENU, prefix),
     },
-    { label: "Directory", path: context === "directory" ? "/" : "/directory" },
+    { label: "Schools", path: context === "directory" ? "/" : "/directory" },
     { label: "Pricing", path: `${prefix}/pricing` },
     { label: "Blogs", path: `${prefix}/blogs` },
   ];
