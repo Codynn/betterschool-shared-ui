@@ -571,24 +571,16 @@ var FEATURES_MEGA_MENU = [
   }
 ];
 var LANDING_ORIGIN = "https://www.betterschool.app";
-function prefixMegaMenu(groups, prefix) {
-  if (!prefix) return groups;
-  return groups.map((group) => ({
-    title: group.title,
-    items: group.items.map((item) => ({
-      label: item.label,
-      path: `${prefix}${item.path}`
-    }))
-  }));
-}
 function buildMainNavLinks(context) {
   const prefix = context === "landing" ? "" : LANDING_ORIGIN;
   return [
     { label: "Home", path: `${prefix}/` },
     {
       label: "Features",
-      path: `${prefix}/feature`,
-      megaMenu: prefixMegaMenu(FEATURES_MEGA_MENU, prefix)
+      path: `${prefix}/feature`
+      // TODO:: Re-enable the Features mega menu dropdown once it's ready to
+      // ship again — the "Features" link still goes to /feature on its own.
+      // megaMenu: prefixMegaMenu(FEATURES_MEGA_MENU, prefix),
     },
     { label: "Schools", path: context === "directory" ? "/" : "/directory" },
     { label: "Pricing", path: `${prefix}/pricing` },
