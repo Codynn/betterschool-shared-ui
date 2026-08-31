@@ -17,6 +17,7 @@ export function Navbar({
   dashboardHref = `${directoryLoginHref.replace(/\/login$/, "")}/dashboard`,
   accountMenuExtra,
   onLogout,
+  onDirectoryLoginClick,
 }: NavbarProps) {
   const pathname = usePathname();
   const { ready, authed, user, logout } = useSchoolAuth();
@@ -172,9 +173,22 @@ export function Navbar({
               </button>
               {isLoginMenuOpen && (
                 <div className="bsu-dropdown">
-                  <Link href={directoryLoginHref} className="bsu-dropdown-item">
-                    School Directory Login
-                  </Link>
+                  {onDirectoryLoginClick ? (
+                    <button
+                      type="button"
+                      className="bsu-dropdown-item"
+                      onClick={() => {
+                        setIsLoginMenuOpen(false);
+                        onDirectoryLoginClick();
+                      }}
+                    >
+                      School Directory Login
+                    </button>
+                  ) : (
+                    <Link href={directoryLoginHref} className="bsu-dropdown-item">
+                      School Directory Login
+                    </Link>
+                  )}
                   <Link
                     href={erpLoginHref}
                     target="_blank"
@@ -360,12 +374,25 @@ export function Navbar({
             </>
           ) : (
             <>
-              <Link
-                href={directoryLoginHref}
-                className="bsu-btn bsu-btn-outline"
-              >
-                School Directory Login
-              </Link>
+              {onDirectoryLoginClick ? (
+                <button
+                  type="button"
+                  className="bsu-btn bsu-btn-outline"
+                  onClick={() => {
+                    setIsDrawerOpen(false);
+                    onDirectoryLoginClick();
+                  }}
+                >
+                  School Directory Login
+                </button>
+              ) : (
+                <Link
+                  href={directoryLoginHref}
+                  className="bsu-btn bsu-btn-outline"
+                >
+                  School Directory Login
+                </Link>
+              )}
               <Link
                 href={erpLoginHref}
                 target="_blank"

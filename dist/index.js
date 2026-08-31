@@ -65,7 +65,8 @@ function Navbar({
   erpSignupHref,
   dashboardHref = `${directoryLoginHref.replace(/\/login$/, "")}/dashboard`,
   accountMenuExtra,
-  onLogout
+  onLogout,
+  onDirectoryLoginClick
 }) {
   const pathname = usePathname();
   const { ready, authed, user, logout } = useSchoolAuth();
@@ -195,7 +196,18 @@ function Navbar({
               }
             ),
             isLoginMenuOpen && /* @__PURE__ */ jsxs("div", { className: "bsu-dropdown", children: [
-              /* @__PURE__ */ jsx(Link, { href: directoryLoginHref, className: "bsu-dropdown-item", children: "School Directory Login" }),
+              onDirectoryLoginClick ? /* @__PURE__ */ jsx(
+                "button",
+                {
+                  type: "button",
+                  className: "bsu-dropdown-item",
+                  onClick: () => {
+                    setIsLoginMenuOpen(false);
+                    onDirectoryLoginClick();
+                  },
+                  children: "School Directory Login"
+                }
+              ) : /* @__PURE__ */ jsx(Link, { href: directoryLoginHref, className: "bsu-dropdown-item", children: "School Directory Login" }),
               /* @__PURE__ */ jsx(
                 Link,
                 {
@@ -386,7 +398,18 @@ function Navbar({
             accountMenuExtra,
             /* @__PURE__ */ jsx("button", { className: "bsu-btn bsu-btn-solid", onClick: handleLogout, children: "Logout" })
           ] }) : /* @__PURE__ */ jsxs(Fragment, { children: [
-            /* @__PURE__ */ jsx(
+            onDirectoryLoginClick ? /* @__PURE__ */ jsx(
+              "button",
+              {
+                type: "button",
+                className: "bsu-btn bsu-btn-outline",
+                onClick: () => {
+                  setIsDrawerOpen(false);
+                  onDirectoryLoginClick();
+                },
+                children: "School Directory Login"
+              }
+            ) : /* @__PURE__ */ jsx(
               Link,
               {
                 href: directoryLoginHref,

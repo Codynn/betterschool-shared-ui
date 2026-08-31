@@ -33,9 +33,16 @@ type NavbarProps = {
     accountMenuExtra?: ReactNode;
     /** Called when the user clicks logout; should also clear any app-specific state. */
     onLogout?: () => void;
+    /**
+     * When provided, "School Directory Login" renders as a button calling this
+     * instead of a `<Link>` to `directoryLoginHref` — lets a consumer open a
+     * login popup in place instead of navigating to a dedicated page.
+     * `directoryLoginHref` is still required as a no-JS/fallback target.
+     */
+    onDirectoryLoginClick?: () => void;
 };
 
-declare function Navbar({ logo, homeHref, navLinks, directoryLoginHref, directorySignupHref, erpLoginHref, erpSignupHref, dashboardHref, accountMenuExtra, onLogout, }: NavbarProps): react.JSX.Element;
+declare function Navbar({ logo, homeHref, navLinks, directoryLoginHref, directorySignupHref, erpLoginHref, erpSignupHref, dashboardHref, accountMenuExtra, onLogout, onDirectoryLoginClick, }: NavbarProps): react.JSX.Element;
 
 declare const SCHOOL_TOKEN_KEY = "schoolToken";
 declare const SCHOOL_USER_KEY = "schoolUser";
