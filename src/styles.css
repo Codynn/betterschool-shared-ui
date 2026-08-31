@@ -38,6 +38,7 @@
   color: var(--bsu-text-muted);
   transition: color 0.15s ease;
   text-decoration: none;
+  padding: 0.9375rem 0rem;
 }
 
 .bsu-link:hover,
