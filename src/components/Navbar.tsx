@@ -27,10 +27,8 @@ export function Navbar({
   const [openMobileMegaMenu, setOpenMobileMegaMenu] = useState<string | null>(
     null,
   );
-  const [isLoginMenuOpen, setIsLoginMenuOpen] = useState(false);
   const [isAvatarMenuOpen, setIsAvatarMenuOpen] = useState(false);
 
-  const loginMenuRef = useRef<HTMLDivElement>(null);
   const avatarMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -39,12 +37,6 @@ export function Navbar({
 
   useEffect(() => {
     function onClickOutside(e: MouseEvent) {
-      if (
-        loginMenuRef.current &&
-        !loginMenuRef.current.contains(e.target as Node)
-      ) {
-        setIsLoginMenuOpen(false);
-      }
       if (
         avatarMenuRef.current &&
         !avatarMenuRef.current.contains(e.target as Node)
@@ -55,6 +47,14 @@ export function Navbar({
     document.addEventListener("mousedown", onClickOutside);
     return () => document.removeEventListener("mousedown", onClickOutside);
   }, []);
+
+  const handleLoginClick = () => {
+    if (onDirectoryLoginClick) {
+      onDirectoryLoginClick();
+    } else {
+      window.location.href = directoryLoginHref;
+    }
+  };
 
   const handleLogout = () => {
     logout();
@@ -163,49 +163,19 @@ export function Navbar({
               )}
             </div>
           ) : (
-            <div ref={loginMenuRef} style={{ position: "relative" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
               <button
                 className="bsu-btn bsu-btn-outline"
-                onClick={() => setIsLoginMenuOpen((v) => !v)}
-                aria-expanded={isLoginMenuOpen}
+                onClick={handleLoginClick}
               >
                 Log In
               </button>
-              {isLoginMenuOpen && (
-                <div className="bsu-dropdown">
-                  {onDirectoryLoginClick ? (
-                    <button
-                      type="button"
-                      className="bsu-dropdown-item"
-                      onClick={() => {
-                        setIsLoginMenuOpen(false);
-                        onDirectoryLoginClick();
-                      }}
-                    >
-                      School Directory Login
-                    </button>
-                  ) : (
-                    <Link href={directoryLoginHref} className="bsu-dropdown-item">
-                      School Directory Login
-                    </Link>
-                  )}
-                  <Link
-                    href={erpLoginHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bsu-dropdown-item"
-                  >
-                    BetterSchool ERP Login
-                  </Link>
-                </div>
-              )}
               {erpSignupHref && (
                 <Link
                   href={erpSignupHref}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bsu-btn bsu-btn-solid"
-                  style={{ marginLeft: "0.5rem" }}
                 >
                   Signup
                 </Link>
@@ -374,33 +344,16 @@ export function Navbar({
             </>
           ) : (
             <>
-              {onDirectoryLoginClick ? (
-                <button
-                  type="button"
-                  className="bsu-btn bsu-btn-outline"
-                  onClick={() => {
-                    setIsDrawerOpen(false);
-                    onDirectoryLoginClick();
-                  }}
-                >
-                  School Directory Login
-                </button>
-              ) : (
-                <Link
-                  href={directoryLoginHref}
-                  className="bsu-btn bsu-btn-outline"
-                >
-                  School Directory Login
-                </Link>
-              )}
-              <Link
-                href={erpLoginHref}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                type="button"
                 className="bsu-btn bsu-btn-outline"
+                onClick={() => {
+                  setIsDrawerOpen(false);
+                  handleLoginClick();
+                }}
               >
-                BetterSchool ERP Login
-              </Link>
+                Log In
+              </button>
               {(directorySignupHref || erpSignupHref) && (
                 <Link
                   href={erpSignupHref ?? directorySignupHref ?? "#"}

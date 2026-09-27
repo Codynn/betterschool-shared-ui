@@ -75,18 +75,13 @@ function Navbar({
   const [openMobileMegaMenu, setOpenMobileMegaMenu] = useState2(
     null
   );
-  const [isLoginMenuOpen, setIsLoginMenuOpen] = useState2(false);
   const [isAvatarMenuOpen, setIsAvatarMenuOpen] = useState2(false);
-  const loginMenuRef = useRef(null);
   const avatarMenuRef = useRef(null);
   useEffect2(() => {
     document.body.style.overflow = isDrawerOpen ? "hidden" : "";
   }, [isDrawerOpen]);
   useEffect2(() => {
     function onClickOutside(e) {
-      if (loginMenuRef.current && !loginMenuRef.current.contains(e.target)) {
-        setIsLoginMenuOpen(false);
-      }
       if (avatarMenuRef.current && !avatarMenuRef.current.contains(e.target)) {
         setIsAvatarMenuOpen(false);
       }
@@ -94,6 +89,13 @@ function Navbar({
     document.addEventListener("mousedown", onClickOutside);
     return () => document.removeEventListener("mousedown", onClickOutside);
   }, []);
+  const handleLoginClick = () => {
+    if (onDirectoryLoginClick) {
+      onDirectoryLoginClick();
+    } else {
+      window.location.href = directoryLoginHref;
+    }
+  };
   const handleLogout = () => {
     logout();
     onLogout?.();
@@ -185,40 +187,15 @@ function Navbar({
               accountMenuExtra,
               /* @__PURE__ */ jsx("button", { className: "bsu-dropdown-item", onClick: handleLogout, children: "Logout" })
             ] })
-          ] }) : /* @__PURE__ */ jsxs("div", { ref: loginMenuRef, style: { position: "relative" }, children: [
+          ] }) : /* @__PURE__ */ jsxs("div", { style: { display: "flex", alignItems: "center", gap: "0.5rem" }, children: [
             /* @__PURE__ */ jsx(
               "button",
               {
                 className: "bsu-btn bsu-btn-outline",
-                onClick: () => setIsLoginMenuOpen((v) => !v),
-                "aria-expanded": isLoginMenuOpen,
+                onClick: handleLoginClick,
                 children: "Log In"
               }
             ),
-            isLoginMenuOpen && /* @__PURE__ */ jsxs("div", { className: "bsu-dropdown", children: [
-              onDirectoryLoginClick ? /* @__PURE__ */ jsx(
-                "button",
-                {
-                  type: "button",
-                  className: "bsu-dropdown-item",
-                  onClick: () => {
-                    setIsLoginMenuOpen(false);
-                    onDirectoryLoginClick();
-                  },
-                  children: "School Directory Login"
-                }
-              ) : /* @__PURE__ */ jsx(Link, { href: directoryLoginHref, className: "bsu-dropdown-item", children: "School Directory Login" }),
-              /* @__PURE__ */ jsx(
-                Link,
-                {
-                  href: erpLoginHref,
-                  target: "_blank",
-                  rel: "noopener noreferrer",
-                  className: "bsu-dropdown-item",
-                  children: "BetterSchool ERP Login"
-                }
-              )
-            ] }),
             erpSignupHref && /* @__PURE__ */ jsx(
               Link,
               {
@@ -226,7 +203,6 @@ function Navbar({
                 target: "_blank",
                 rel: "noopener noreferrer",
                 className: "bsu-btn bsu-btn-solid",
-                style: { marginLeft: "0.5rem" },
                 children: "Signup"
               }
             )
@@ -398,33 +374,16 @@ function Navbar({
             accountMenuExtra,
             /* @__PURE__ */ jsx("button", { className: "bsu-btn bsu-btn-solid", onClick: handleLogout, children: "Logout" })
           ] }) : /* @__PURE__ */ jsxs(Fragment, { children: [
-            onDirectoryLoginClick ? /* @__PURE__ */ jsx(
+            /* @__PURE__ */ jsx(
               "button",
               {
                 type: "button",
                 className: "bsu-btn bsu-btn-outline",
                 onClick: () => {
                   setIsDrawerOpen(false);
-                  onDirectoryLoginClick();
+                  handleLoginClick();
                 },
-                children: "School Directory Login"
-              }
-            ) : /* @__PURE__ */ jsx(
-              Link,
-              {
-                href: directoryLoginHref,
-                className: "bsu-btn bsu-btn-outline",
-                children: "School Directory Login"
-              }
-            ),
-            /* @__PURE__ */ jsx(
-              Link,
-              {
-                href: erpLoginHref,
-                target: "_blank",
-                rel: "noopener noreferrer",
-                className: "bsu-btn bsu-btn-outline",
-                children: "BetterSchool ERP Login"
+                children: "Log In"
               }
             ),
             (directorySignupHref || erpSignupHref) && /* @__PURE__ */ jsx(
